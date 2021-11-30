@@ -1,13 +1,62 @@
 # Packer-TP1
 ## Réponses du TP 1
 
+Installation de git sur la VM d'origine:
+```bash
+[root@tp-1 ~]# dnf install git
+```
+* Ajout des informations de configuration de git + génération clé SSH
 ```bash
 [root@tp-1 ~]# git config --global user.name "<USERNAME>"
 [root@tp-1 ~]# git config --global user.email "<EMAIL>"
 [root@tp-1 ~]# ssh-keygen -t ed25119
 ```
+* Ajout de la clé sur git
+* Clone du dépôt
+```bash
+[root@tp-1 ~]# git clone git@github.com:HDCarBoNe/Packer-TP1.git
+[root@tp-1 ~]# cd Packer-TP1/
+```
 
-id_rsa.pub:
+* Installation d'ansible
+```bash
+dnf update -y
+dnf install -y epel-release
+dnf install -y ansible
 ```
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFTm4Kz4/rfCU4nsAuQqS2xVKdJaJCkGFGu3T7FPu6b root@tp-1
+* Exécution de packer
 ```
+[root@tp-1 ~]# packer build packer.pkr.hcl
+```
+* Le rendu dans la console
+``` bash
+[root@tp-1 Packer-TP1]# packer build packer.pkr.hcl
+qemu.example: output will be in this color.
+
+==> qemu.example: Retrieving ISO
+==> qemu.example: Trying ../Rocky-8.4-x86_64-minimal.iso
+==> qemu.example: Trying ../Rocky-8.4-x86_64-minimal.iso?checksum=sha256%3A0de5f12eba93e00fefc06c                                                             db0aa4389a0972a4212977362ea18bde46a1a1aa4f
+==> qemu.example: ../Rocky-8.4-x86_64-minimal.iso?checksum=sha256%3A0de5f12eba93e00fefc06cdb0aa43                                                             89a0972a4212977362ea18bde46a1a1aa4f => /root/Rocky-8.4-x86_64-minimal.iso
+==> qemu.example: Starting HTTP server on port 8588
+==> qemu.example: Found port for communicator (SSH, WinRM, etc): 3071.
+==> qemu.example: Looking for available port between 5900 and 6000 on 127.0.0.1
+==> qemu.example: Starting VM, booting from CD-ROM
+    qemu.example: The VM will be run headless, without a GUI. If you want to
+    qemu.example: view the screen of the VM, connect via VNC without a password to
+    qemu.example: vnc://127.0.0.1:5991
+==> qemu.example: Waiting 10s for boot...
+==> qemu.example: Connecting to VM via VNC (127.0.0.1:5991)
+==> qemu.example: Typing the boot command over VNC...
+    qemu.example: Not using a NetBridge -- skipping StepWaitGuestAddress
+==> qemu.example: Using SSH communicator to connect: 127.0.0.1
+==> qemu.example: Waiting for SSH to become available...
+```
+
+* On se conencte ensuite au vnc en utilisant moba xterm
+  - Création d'une nouvel connection vnc
+  - Adress Remote: 127.0.0.1
+  - Port: 5991
+  - Ensuite dans network >- SSH Gateway (Jump host)
+    - Adresse celle de la VM d'origine 192.168.100.131 dans mon cas
+    - Username: root
+    - Port: 22
