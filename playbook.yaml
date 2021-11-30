@@ -7,10 +7,8 @@
         name: git
         state: latest
         
-    - name : Installation des dépendances de build 1/2
+    - name : Installation des dépendances de build
       shell: dnf groupinstall -y "Development Tools"
-    - name : Installation des dépendances de build 2/2
-      shell: dnf install -y gcc-go
     - name : Installation des dépendances Go
       shell: dnf install -y go
     - name : Installation de golang-myip
