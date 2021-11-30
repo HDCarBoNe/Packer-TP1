@@ -40,6 +40,7 @@
       shell: setenforce 0
     - name: Activation du service golang-myip
       shell: |
+        systemctl daemon-reload
         systemctl enable golangip
         systemctl start golangip
     - name: Ajout des clé SSH
