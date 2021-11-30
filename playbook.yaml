@@ -22,11 +22,11 @@
       shell: cp /tmp/golang-myip/build/server.x86_64 /usr/bin/
     - name: Création du service golangip 1/2
       file:
-        path: "/etc/systemd/system/golanip.service"
+        path: "/etc/systemd/system/golangip.service"
         state: touch
     - name: Création du service golanip 2/2
       copy:
-        dest: "/etc/systemd/system/golanip.service"
+        dest: "/etc/systemd/system/golangip.service"
         content: |
           [Unit]
           Description=Golang-myIP
@@ -43,6 +43,11 @@
         systemctl daemon-reload
         systemctl enable golangip
         systemctl start golangip
+    - name: "No SE Linux"
+      hosts: all
+      remote_user: root
+      tasks:
+        - selinux: state=disabled
     - name: Ajout des clé SSH
       shell: |
         echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjIRqNf3oVs8vbAcoNHzXMxlS5fL6qqFxfdi221S9p6" >> /home/template/.ssh/authorized_keys
