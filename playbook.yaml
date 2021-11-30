@@ -15,19 +15,6 @@
       shell: |
         git clone https://github.com/BastienBalaud/golang-myip.git
         cd golang-myip/
-    - name: Changement du port d'écoute de 8080 à 80
-        become: yes
-        become_user: root
-        tags: example1
-        lineinfile:
-          path: /root/golang-myip/server.go
-          # The String to Search
-          regexp: "args.Port = 8080" 
-          # The String to Replace
-          line: "args.Port = 80"
-          state: present
-          backup: yes
-        register: example1out
     - name: Compilation de golang-myip
       shell: | 
         make
@@ -44,7 +31,7 @@
           Description=Golang-myIP
           [Service]
           Type=simple
-          ExecStart=/usr/bin/server.x86_64
+          ExecStart=/usr/bin/server.x86_64 --port 80
           Restart=always
           [Install]
           WantedBy=multi-user.target
