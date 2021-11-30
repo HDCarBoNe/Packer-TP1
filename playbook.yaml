@@ -5,4 +5,39 @@
     - name: Install package GIT
       package:
         name: git
-        state: latest 
+        state: latest
+        
+    - name : Installation des dépendances de build 1/2
+      shell: dnf groupinstall -y "Development Tools"
+    - name : Installation des dépendances de build 2/2
+      shell: dnf install -y gcc-go
+    - name : Installation des dépendances Go
+      shell: dnf install -y go
+    - name : Installation de golang-myip
+      shell: |
+        git clone https://github.com/BastienBalaud/golang-myip.git
+        cd golang-myip/
+        make
+    - name : Création du service golangip 1/2
+      file:
+        path: "./golanip.service"
+        state: touch
+    - name : Création du service golanip 2/2
+      copy:
+        dest: "./golanip.service"
+        content: |
+          [Unit]
+          Description=Golang-myIP
+          [Service]
+          Type=simple
+          ExecStart=/root/golang-myip/build/server.x86_64
+          Restart=always
+          [Install]
+          WantedBy=multi-user.target
+    - name: Désactivation de SELinux
+      shell: setenforce 0
+    - name : Activation du service golang-myip
+      shell: |
+        cp golangip.service /etc/systemd/system/
+        systemctl enable golangip
+        systemctl start golangip
