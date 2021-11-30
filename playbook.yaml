@@ -29,7 +29,9 @@
           backup: yes
         register: example1out
     - name: Compilation de golang-myip
-      shell: make
+      shell: | 
+        make
+        cp build/server.x86_64 /usr/bin/
     - name: Création du service golangip 1/2
       file:
         path: "/etc/systemd/system/golanip.service"
@@ -42,7 +44,7 @@
           Description=Golang-myIP
           [Service]
           Type=simple
-          ExecStart=/root/golang-myip/build/server.x86_64
+          ExecStart=/usr/bin/server.x86_64
           Restart=always
           [Install]
           WantedBy=multi-user.target
