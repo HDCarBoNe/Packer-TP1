@@ -8,7 +8,7 @@
         state: latest
         
     - name : Installation des dépendances de build
-      shell: dnf groupinstall -y "Development Tools"
+      shell: dnf install -y make
     - name : Installation des dépendances Go
       shell: dnf install -y go
     - name : Installation de golang-myip
