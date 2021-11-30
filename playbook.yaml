@@ -7,22 +7,36 @@
         name: git
         state: latest
         
-    - name : Installation des dépendances de build
+    - name: Installation des dépendances de build
       shell: dnf install -y make
-    - name : Installation des dépendances Go
+    - name: Installation des dépendances Go
       shell: dnf install -y go golang
-    - name : Installation de golang-myip
+    - name: Installation de golang-myip
       shell: |
         git clone https://github.com/BastienBalaud/golang-myip.git
         cd golang-myip/
-        make
-    - name : Création du service golangip 1/2
+    - name: Changement du port d'écoute de 8080 à 80
+        become: yes
+        become_user: root
+        tags: example1
+        lineinfile:
+          path: /root/golang-myip/server.go
+          # The String to Search
+          regexp: "args.Port = 8080" 
+          # The String to Replace
+          line: "args.Port = 80"
+          state: present
+          backup: yes
+        register: example1out
+    - name: Compilation de golang-myip
+      shell: make
+    - name: Création du service golangip 1/2
       file:
-        path: "./golanip.service"
+        path: "/etc/systemd/system/golanip.service"
         state: touch
-    - name : Création du service golanip 2/2
+    - name: Création du service golanip 2/2
       copy:
-        dest: "./golanip.service"
+        dest: "/etc/systemd/system/golanip.service"
         content: |
           [Unit]
           Description=Golang-myIP
@@ -34,8 +48,12 @@
           WantedBy=multi-user.target
     - name: Désactivation de SELinux
       shell: setenforce 0
-    - name : Activation du service golang-myip
+    - name: Activation du service golang-myip
       shell: |
-        cp golangip.service /etc/systemd/system/
         systemctl enable golangip
         systemctl start golangip
+    - name: Ajout des clé SSH
+      shell: |
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjIRqNf3oVs8vbAcoNHzXMxlS5fL6qqFxfdi221S9p6" >> /root/.ssh/authorized_keys
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmM7WeoXFKZGnDLV8RA3jfeYKPIYzTNIe3Yqr7Z11BV" >> /root/.ssh/authorized_keys
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXNu2wW1ssMqlzRd3q/YodypM77UNFz7tF6h2v+hYYZ" >> /root/.ssh/authorized_keys
