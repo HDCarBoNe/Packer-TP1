@@ -8,8 +8,8 @@ source "qemu" "example" {
   accelerator       = "kvm"
   http_directory    = "./ks"
   ssh_username      = "root"
-  ssh_password      = "%Serveur44"
-  ssh_timeout       = "20m"
+  ssh_password      = "qwerty"
+  ssh_timeout       = "60m"
   vm_name           = "tdhtest"
   memory            = "2048"
   net_device        = "virtio-net"
@@ -24,4 +24,8 @@ source "qemu" "example" {
 
 build {  
   sources = ["source.qemu.example"]
+  provisioner "ansible" {      
+    playbook_file = "./playbook.yaml"
+    user = "root"
+  }
 }
