@@ -50,6 +50,6 @@
         - selinux: state=disabled
     - name: Ajout des clé SSH
       shell: |
-        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjIRqNf3oVs8vbAcoNHzXMxlS5fL6qqFxfdi221S9p6" >> /home/template/.ssh/authorized_keys
-        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmM7WeoXFKZGnDLV8RA3jfeYKPIYzTNIe3Yqr7Z11BV" >> /home/template/.ssh/authorized_keys
-        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXNu2wW1ssMqlzRd3q/YodypM77UNFz7tF6h2v+hYYZ" >> /home/template/.ssh/authorized_keys
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjIRqNf3oVs8vbAcoNHzXMxlS5fL6qqFxfdi221S9p6" >> /root/.ssh/authorized_keys
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmM7WeoXFKZGnDLV8RA3jfeYKPIYzTNIe3Yqr7Z11BV" >> /root/.ssh/authorized_keys
+        echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXNu2wW1ssMqlzRd3q/YodypM77UNFz7tF6h2v+hYYZ" >> /root/.ssh/authorized_keys
