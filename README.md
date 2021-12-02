@@ -60,3 +60,13 @@ qemu.example: output will be in this color.
     - Adresse celle de la VM d'origine 192.168.100.131 dans mon cas
     - Username: root
     - Port: 22
+* Le script Ansible permet:
+  - Installation des paquets Git
+  - Installation de make 
+  - Installation de golang 
+  - Clone du projet Golang-MyIP
+  - Compilation et installation de Golang-MyIP
+  - Création du service golangip
+  - Activation du service au démarrage
+  - Désactivation de SELinux
+  - Ajout des clés SSH
