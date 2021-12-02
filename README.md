@@ -73,12 +73,11 @@ qemu.example: output will be in this color.
 
 * Executer le build:
 ```
-qemu-system-x86_64 -name Rocky-GolangMyIP-packer \
+/usr/libexec/qemu-system-x86_64 -name Rocky-GolangMyIP-packer \
                     -netdev user,id=user.0,hostfwd=tcp::4141-:22 \
                     -device virtio-net,netdev=user.0 \
                     -drive file=build-rocky-8/tdhtest,if=virtio,cache=writeback,discard=ignore,format=qcow2 \
                     -machine type=pc,accel=kvm \
                     -smp cpus=2,sockets=2 \
                     -m 4096M \
-                    -display sdl
 ```
