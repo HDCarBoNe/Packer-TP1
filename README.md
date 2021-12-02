@@ -70,3 +70,26 @@ qemu.example: output will be in this color.
   - Activation du service au démarrage
   - Désactivation de SELinux
   - Ajout des clés SSH
+
+* Executer le build:
+```
+/usr/libexec/qemu-system-x86_64 -name Rocky-GolangMyIP-packer \
+                    -netdev user,id=user.0,hostfwd=tcp::4141-:22 \
+                    -device virtio-net,netdev=user.0 \
+                    -drive file=build-rocky-8/tdhtest,if=virtio,cache=writeback,discard=ignore,format=qcow2 \
+                    -machine type=pc,accel=kvm \
+                    -smp cpus=2,sockets=2 \
+                    -m 4096M \
+```
+
+
+* Règles de firewall implémentés
+
+| Etat | Protocole | IP.Source | Port.Source | IP.Destination | Port.Destination|
+---:|:---:|:---:|:---:|:---:|:---:|
+| Pass | TCP | * | * | ens33 | 80 |
+| Pass | UDP | * | 67 | ens33 | 68 |
+| Pass | TCP | * | * | ens33 | 22 |
+| Pass | UDP | * | * | 127.0.0.1 | 323- |
+| Pass | TCP | * | * | ens33 | 5900 |
+| Deny | * | * | * | * | * |
