@@ -36,8 +36,6 @@
           Restart=always
           [Install]
           WantedBy=multi-user.target
-    - name: Désactivation de SELinux
-      shell: setenforce 0
     - name: Activation du service golang-myip
       shell: |
         systemctl daemon-reload
