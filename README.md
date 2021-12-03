@@ -84,6 +84,7 @@ qemu.example: output will be in this color.
 
 
 * Règles de firewall implémentés
+
 | Etat | Protocole | IP.Source | Port.Source | IP.Destination | Port.Destination|
 ---:|:---:|:---:|:---:|:---:|:---:|
 | Pass | TCP | * | * | ens33 | 80 |
@@ -92,3 +93,10 @@ qemu.example: output will be in this color.
 | Pass | UDP | * | * | 127.0.0.1 | 323- |
 | Pass | TCP | * | * | ens33 | 5900 |
 | Deny | * | * | * | * | * |
+
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
