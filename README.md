@@ -87,6 +87,7 @@ qemu.example: output will be in this color.
 
 | Etat | Protocole | IP.Source | Port.Source | IP.Destination | Port.Destination|
 ---:|:---:|:---:|:---:|:---:|:---:|
+| Pass | ICMP | * | * | * | * | 
 | Pass | TCP | * | * | ens33 | 80 |
 | Pass | UDP | * | 67 | ens33 | 68 |
 | Pass | TCP | * | * | ens33 | 22 |
