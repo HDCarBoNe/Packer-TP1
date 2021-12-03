@@ -84,11 +84,11 @@ qemu.example: output will be in this color.
 
 
 * Règles de firewall implémentés
-| Etat | Protocole | IP.Source | Port.Source | IP.Destination | Port.Destination |
-|---|---|---|---|---|---|
-| Pass | TCP | * | * | ens33 | 80 |
-| Pass | UDP | * | 67 | ens33 | 68 |
-| Pass | TCP | * | * | ens33 | 22 |
-| Pass | UDP | * | * | 127.0.0.1 | 323 |
-| Pass | TCP | * | * | ens33 | 5900 |
-| Deny | * | * | * | * | * |
+ Etat | Protocole | IP.Source | Port.Source | IP.Destination | Port.Destination
+---|---|---|---|---|---
+ Pass | TCP | * | * | ens33 | 80
+ Pass | UDP | * | 67 | ens33 | 68
+ Pass | TCP | * | * | ens33 | 22
+ Pass | UDP | * | * | 127.0.0.1 | 323
+ Pass | TCP | * | * | ens33 | 5900
+ Deny | * | * | * | * | * 
